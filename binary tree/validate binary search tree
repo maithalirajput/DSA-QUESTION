@@ -1,0 +1,13 @@
+class Solution {
+    public boolean isValidBST(TreeNode root) {
+        return helper(root, Long.MIN_VALUE, Long.MAX_VALUE);
+    }
+
+    public boolean helper(TreeNode root, long minval, long maxval){
+        if(root == null){
+            return true;
+        }
+        if(root.val<=minval || root.val>=maxval) return false;
+        return helper(root.left, minval, root.val) && helper(root.right, root.val, maxval);
+    }
+}
