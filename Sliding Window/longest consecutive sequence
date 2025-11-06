@@ -1,0 +1,29 @@
+import java.util.*;
+
+class Solution {
+    public int longestConsecutive(int[] nums) {
+        int n = nums.length;
+        if (n == 0) return 0;
+
+        Arrays.sort(nums);
+
+        int maxLen = 1;
+        int currentLen = 1;
+
+        for (int i = 1; i < n; i++) {
+            if (nums[i] == nums[i - 1]) {
+                // duplicate — ignore, don't change currentLen
+                continue;
+            } else if (nums[i] == nums[i - 1] + 1) {
+                // consecutive — extend current run
+                currentLen++;
+            } else {
+                // gap — reset run
+                currentLen = 1;
+            }
+            maxLen = Math.max(maxLen, currentLen);
+        }
+
+        return maxLen;
+    }
+}
